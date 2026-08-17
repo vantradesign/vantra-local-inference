@@ -1,0 +1,13 @@
+@vantra-design/local-inference
+Copyright 2026 Vantra Design
+
+This product includes software developed by Vantra Design
+(https://vantra.design).
+
+Third-party dependencies and their licenses:
+
+- @mlc-ai/web-llm — Apache-2.0
+  https://github.com/mlc-ai/web-llm
+
+- kokoro-js — Apache-2.0
+  https://github.com/niconiconainu/kokoro-js
