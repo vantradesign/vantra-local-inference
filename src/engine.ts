@@ -1,5 +1,5 @@
 import type { MLCEngine } from '@mlc-ai/web-llm'
-import type { EngineConfig, ModelProgress } from './types.js'
+import type { EngineConfig, GenerateOptions, ModelProgress } from './types.js'
 import { InferenceError } from './types.js'
 import { isWebGPUAvailable } from './webgpu.js'
 import { normalizeProgress } from './progress.js'
@@ -74,6 +74,7 @@ export class LocalLLMEngine {
   async *generate(
     prompt: string,
     systemPrompt?: string,
+    options?: GenerateOptions,
   ): AsyncGenerator<string> {
     if (!this.engine) {
       throw new InferenceError(
@@ -94,6 +95,8 @@ export class LocalLLMEngine {
       const stream = await this.engine.chat.completions.create({
         messages,
         stream: true,
+        ...(options?.maxTokens != null && { max_tokens: options.maxTokens }),
+        ...(options?.temperature != null && { temperature: options.temperature }),
       })
 
       for await (const chunk of stream) {

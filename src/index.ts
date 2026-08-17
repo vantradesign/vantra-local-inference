@@ -10,6 +10,7 @@ export type {
   ModelProgress,
   InferenceErrorCode,
   EngineConfig,
+  GenerateOptions,
   TTSConfig,
 } from './types.js'
 export { InferenceError } from './types.js'

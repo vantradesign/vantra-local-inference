@@ -219,6 +219,31 @@ describe('LocalLLMEngine', () => {
       })
     })
 
+    it('passes maxTokens and temperature to completions API', async () => {
+      enableWebGPU()
+      mockCreate.mockResolvedValue(makeMockEngine())
+
+      async function* empty() { /* nothing */ }
+      mockCompletionsCreate.mockResolvedValue(empty())
+
+      const engine = new LocalLLMEngine()
+      await engine.init()
+
+      for await (const _t of engine.generate('hello', 'system', { maxTokens: 256, temperature: 0.3 })) {
+        void _t
+      }
+
+      expect(mockCompletionsCreate).toHaveBeenCalledWith({
+        messages: [
+          { role: 'system', content: 'system' },
+          { role: 'user', content: 'hello' },
+        ],
+        stream: true,
+        max_tokens: 256,
+        temperature: 0.3,
+      })
+    })
+
     it('skips chunks with no content', async () => {
       enableWebGPU()
       mockCreate.mockResolvedValue(makeMockEngine())

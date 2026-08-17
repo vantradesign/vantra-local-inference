@@ -46,6 +46,14 @@ export interface EngineConfig {
   onProgress?: (progress: ModelProgress) => void
 }
 
+/** Options for a single generation call. */
+export interface GenerateOptions {
+  /** Maximum number of tokens to generate. */
+  maxTokens?: number
+  /** Sampling temperature (0 = deterministic, higher = more creative). */
+  temperature?: number
+}
+
 /** Configuration for TTS. */
 export interface TTSConfig {
   voice?: string
