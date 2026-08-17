@@ -84,10 +84,25 @@ const ttsReady = await LocalTTS.isCached()
 
 | Component | JS bundle (gzipped) | Runtime download | Cached? |
 | --- | --- | --- | --- |
-| This package | ~5 KB | — | — |
-| WebLLM runtime | ~150 KB | — | — |
+| This package | 2.7 KB | — | — |
+| WebLLM runtime (tree-shaken) | ~150 KB | — | — |
 | Llama-3.2-1B-Instruct (q4f32_1) | — | ~500 MB | ✓ Cache API |
-| Kokoro TTS | ~200 KB | ~82 MB | ✓ Cache API |
+| Kokoro TTS (q8, WebGPU) | — | ~82 MB | ✓ Cache API |
+| MiniLM-L6-v2 embeddings | — | ~23 MB | ✓ Cache API |
+
+> **Cache sharing:** Both `@vantra-design/ask-design-system` and `@vantra-design/screenreader-empathy` share the same model caches through this package. A model downloaded by one tool is immediately available to the other — no re-download.
+
+## Content Security Policy
+
+Sites using this package need these CSP directives for model downloads:
+
+```txt
+connect-src 'self' https://huggingface.co https://*.huggingface.co https://cdn-lfs.hf.co https://cdn-lfs-us-1.hf.co https://cdn-lfs-us-1.huggingface.co;
+script-src 'self' 'wasm-unsafe-eval';
+worker-src 'self' blob:;
+```
+
+After the one-time model download, **zero network calls** are made.
 
 ## Development
 
