@@ -1,5 +1,11 @@
 # @vantra-design/local-inference
 
+## 0.3.0
+
+### Minor Changes
+
+- Add GenerateOptions to generate() for per-call maxTokens and temperature
+
 ## 0.2.0
 
 ### Minor Changes

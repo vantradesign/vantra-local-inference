@@ -1,6 +1,6 @@
 {
   "name": "@vantra-design/local-inference",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Shared browser-side inference runtime: WebGPU detection, WebLLM engine wrapper, and Kokoro TTS — used by @vantra-design/ask-design-system and @vantra-design/screenreader-empathy.",
   "keywords": [
     "webgpu",
